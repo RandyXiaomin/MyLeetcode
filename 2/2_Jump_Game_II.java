@@ -10,12 +10,7 @@ public class Solution {
                 newIndex = i;
                 res++;
             }
-            /*
-             *  its >= but not >
-             */
-            if (i + A[i] >= newIndex + A[newIndex]) {
-                newIndex = i;
-            }
+            newIndex = i + A[i] >= newIndex + A[newIndex] ? i : newIndex;
         }
         return res;
     }

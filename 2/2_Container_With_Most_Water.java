@@ -3,15 +3,15 @@ public class Solution {
         if (height == null || height.length <= 1) {
             return 0;
         }
-        int max = 0;
-        for (int start = 0 ,end = height.length - 1; start < end;) {
-            max = Math.max((end - start) * Math.min(height[start], height[end]), max);
-            if (height[start] > height[end]) {
-                end--;
+        int ret = 0;
+        for (int left = 0, right = height.length - 1; left < right;) {
+            ret = Math.max(ret, (right - left) * Math.min(height[right], height[left]));
+            if (height[left] > height[right]) {
+                right--;
             } else {
-                start++;
+                left++;
             }
         }
-        return max;
+        return ret;
     }
 }

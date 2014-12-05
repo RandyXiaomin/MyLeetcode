@@ -1,34 +1,25 @@
 public class Solution {
     public List<List<Integer>> combinationSum2(int[] num, int target) {
-        List<List<Integer>> res = new ArrayList<>();
+        List<List<Integer>> ret = new ArrayList<>();
         if (num == null || num.length == 0) {
-            return res;
+            return ret;
         }
         Arrays.sort(num);
-        List<Integer> list = new ArrayList<>();
-        for (int n : num) {
-            list.add(n);
-        }
-        helper(new ArrayList<Integer>(), 0, target, list, res, new HashSet<List<Integer>>());
-        return res;
+        combinationSum2(0, num, new ArrayList<Integer>(), target, new HashSet<List<Integer>>(), ret);
+        return ret;
     }
     
-    public void helper(List<Integer> cur, int start, int target, List<Integer> list, List<List<Integer>> res, Set<List<Integer>> set) {
-        if (target == 0 && set.add(cur)) {
-            res.add(new ArrayList<>(cur));
-        } else {
-            for (int i = start; i < list.size(); i++) {
-                int n = list.get(i);
-                if (n > target) {
-                    break;
-                } else {
-                    cur.add(n);
-                    list.remove(i);
-                    helper(cur, i, target - n, list, res, set);
-                    list.add(i, n);
-                    cur.remove(cur.size() - 1);
-                }
+    public void combinationSum2(int start, int[] num, List<Integer> cur, int target, Set<List<Integer>> set, List<List<Integer>> ret) {
+        if (target == 0) {
+            if (set.add(cur)) {
+                ret.add(new ArrayList<Integer>(cur));
             }
+            return;
+        }
+        for (int i = start; i < num.length && num[i] <= target; i++) {
+            cur.add(num[i]);
+            combinationSum2(i + 1, num, cur, target - num[i], set, ret);
+            cur.remove(cur.size() - 1);
         }
     }
 }

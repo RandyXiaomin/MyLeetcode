@@ -3,12 +3,10 @@ public class Solution {
         if (x < 0) {
             return false;
         }
-        int cur = 0;
-        int y = x;
-        while (y != 0) {
-            cur = cur * 10 + y % 10;
-            y /= 10;
+        int ret = 0;
+        for (int temp = x; temp != 0; temp /= 10) {
+            ret = ret * 10 + temp % 10;
         }
-        return cur == x;
+        return x == ret;
     }
 }

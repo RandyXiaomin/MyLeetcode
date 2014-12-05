@@ -1,6 +1,6 @@
 public class Solution {
     public void flatten(TreeNode root) {
-        helper(root);
+        root = helper(root);
     }
     
     public TreeNode helper(TreeNode root) {

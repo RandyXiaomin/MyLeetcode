@@ -3,23 +3,21 @@ public class Solution {
         if (num == null || num.length == 0) {
             return 0;
         }
-        int res = 1;
         Set<Integer> set = new HashSet<>();
         for (int n : num) {
             set.add(n);
         }
+        int ret = 1;
         for (int n : num) {
-            int max = 0;
-            int up = n;
-            while (set.remove(up++)) {
-                max++;
+            int max = 1;
+            for (int i = n + 1; set.contains(i); i++, max++) {
+                set.remove(i);
             }
-            up = n - 1;
-            while (set.remove(up--)) {
-                max++;
+            for (int i = n - 1; set.contains(i); i--, max++) {
+                set.remove(i);
             }
-            res = Math.max(max, res);
+            ret = Math.max(max, ret);
         }
-        return res;
+        return ret;
     }
 }

@@ -1,22 +1,18 @@
 public class Solution {
     public int trap(int[] A) {
-        if (A == null || A.length < 3) {
+        if (A == null || A.length <= 2) {
             return 0;
         }
-        int[] m = new int[A.length - 2];
-        int max = A[0];
-        for (int i = 1; i < A.length - 1; i++) {
-            m[i - 1] = max;
-            max = Math.max(max, A[i]);
+        int[] leftMax = new int[A.length - 2];
+        for (int i = 1, max = A[0]; i < A.length - 1; i++) {
+            leftMax[i - 1] = max;
+            max = A[i] > max ? A[i] : max;
         }
-        int res = 0;
-        max = A[A.length - 1];
-        for (int i = A.length - 2; i >= 1; i--) {
-            if (A[i] < max && A[i] < m[i - 1]) {
-                res += Math.min(max, m[i - 1]) - A[i];
-            }
-            max = Math.max(max, A[i]);
+        int ret = 0;
+        for (int i = A.length - 2, rightMax = A[A.length - 1]; i >= 1; i--) {
+            ret += Math.min(rightMax, leftMax[i - 1]) > A[i] ? Math.min(rightMax, leftMax[i - 1]) - A[i] : 0;
+            rightMax = A[i] > rightMax ? A[i] : rightMax;
         }
-        return res;
+        return ret;
     }
 }

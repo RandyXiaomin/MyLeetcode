@@ -3,31 +3,17 @@ public class Solution {
         if (s == null || s.length() <= 1) {
             return 0;
         }
-        int[] res = new int[s.length()];
         boolean[][] flag = new boolean[s.length()][s.length()];
-        /*
-         *  backward to ensure [a,b] that b >= a
-         */
-        for (int i = s.length() - 1; i >= 0; i--) {
-            for (int j = i; j < s.length(); j++) {
-                if (s.charAt(i) == s.charAt(j) && (j - i < 2 || flag[i + 1][j - 1])) {
-                    flag[i][j] = true;
+        int[] dp = new int[s.length()];
+        for (int end = 1; end < s.length(); end++) {
+            dp[end] = dp[end - 1] + 1;
+            for (int start = end - 1; start >= 0; start--) {
+                if (s.charAt(start) == s.charAt(end) && (end - start <= 2 || flag[start + 1][end - 1])) {
+                    flag[start][end] = true;
+                    dp[end] = start != 0 ? Math.min(dp[end], dp[start - 1] + 1) : 0;
                 }
             }
         }
-        for (int i = 1; i < s.length(); i++) {
-            if (!flag[0][i]) {
-                int min = s.length();
-                for (int j = 0; j < i; j++) {
-                    if (flag[j + 1][i] && res[j] < min) {
-                        min = res[j];
-                    }
-                }
-                res[i] = min + 1;
-            }
-        }
-        return res[s.length() - 1];
+        return dp[s.length() - 1];
     }
-    
-    
 }

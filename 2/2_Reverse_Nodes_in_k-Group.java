@@ -1,33 +1,32 @@
 public class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
-        if (head == null || head.next == null || k <= 1) {
+        if (head == null || k <= 1) {
             return head;
         }
         ListNode newHead = new ListNode(0);
         newHead.next = head;
-        ListNode temp = newHead;
-        while (temp.next != null) {
-            ListNode tempHead = temp;
-            Stack<ListNode> stack = new Stack<>();
-            for (int i = 0; i < k; i++) {
-                if (temp.next != null) {
-                    stack.push(temp.next);
-                } else {
-                    return newHead.next;
-                }
-                temp = temp.next;
-            }
-            ListNode tail = temp.next;
-            while (!stack.isEmpty()) {
-                tempHead.next = stack.pop();
-                tempHead = tempHead.next;
-            }
-            /*
-             *  tempHead.next = temp.next would fail because temp.next changed during poping stack.
-             */
-            tempHead.next = tail;
-            temp = tempHead;
+        int num = 0;
+        for (ListNode temp = newHead; temp.next != null; temp = temp.next) {
+            num++;
+        }
+        for (ListNode temp = newHead; num >= k; num -= k) {
+            temp = reverse(temp, k);
         }
         return newHead.next;
+    }
+    
+    public ListNode reverse(ListNode head, int k) {
+        ListNode tempHead = head.next;
+        ListNode tempTail = tempHead;
+        ListNode tail = tempHead.next;
+        for (int i = 1; i < k; i++) {
+            ListNode n = tail;
+            tail = tail.next;
+            n.next = tempHead;
+            tempHead = n;
+        }
+        head.next = tempHead;
+        tempTail.next = tail;
+        return tempTail;
     }
 }

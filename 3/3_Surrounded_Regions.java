@@ -62,3 +62,53 @@ public class Solution {
         }
     }
 }
+//
+//  !!!!!!!!!!!!    StackOverFlowError
+//
+// public class Solution {
+//     public void solve(char[][] board) {
+//         if (board == null || board.length <= 1 || board[0].length <= 1) {
+//             return;
+//         }
+//         for (int row = 0; row < board.length; row++) {
+//            if (board[row][0] == 'O') {
+//                board[row][0] = '#';
+//                helper(row, 1, board);
+//            }
+//            if (board[row][board[0].length - 1] == 'O') {
+//                board[row][board[0].length - 1] = '#';
+//                helper(row, board[0].length - 2, board);
+//            }
+//         }
+//         for (int col = 0; col < board[0].length; col++) {
+//             if (board[0][col] == 'O') {
+//                 board[0][col] = '#';
+//                 helper(1, col, board);
+//             }
+//             if (board[board.length - 1][col] == 'O') {
+//                 board[board.length - 1][col] = '#';
+//                 helper(board.length - 2, col, board);
+//             }
+//         }
+//         for (int row = 0; row < board.length; row++) {
+//             for (int col = 0; col < board[0].length; col++) {
+//                 if (board[row][col] == '#') {
+//                     board[row][col] = 'O';
+//                 } else if (board[row][col] == 'O') {
+//                     board[row][col] = 'X';
+//                 }
+//             }
+//         }
+//     }
+    
+//     public void helper(int row, int col, char[][] board) {
+//         if (row < 0 || row >= board.length || col < 0 || col >= board[0].length || board[row][col] != 'O') {
+//             return;
+//         }
+//         board[row][col] = '#';
+//         helper(row + 1, col, board);
+//         helper(row - 1, col, board);
+//         helper(row, col + 1, board);
+//         helper(row, col - 1, board);
+//     }
+// }

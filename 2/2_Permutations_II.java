@@ -1,24 +1,24 @@
 public class Solution {
     public List<List<Integer>> permuteUnique(int[] num) {
-        List<List<Integer>> res = new ArrayList<>();
+        List<List<Integer>> ret = new ArrayList<>();
         if (num == null || num.length == 0) {
-            return res;
+            return ret;
         }
         Set<List<Integer>> set = new HashSet<>();
-        res.add(new ArrayList<>());
+        ret.add(new ArrayList<Integer>());
         for (int i = 0; i < num.length; i++) {
             List<List<Integer>> temp = new ArrayList<>();
-            for (int j = 0; j < res.size(); j++) {
-                for (int k = 0; k <= res.get(j).size(); k++) {
-                    List<Integer> item = new ArrayList<>(res.get(j));
-                    item.add(k, num[i]);
-                    if (set.add(item)) {
-                        temp.add(item);
+            for (int j = 0; j < ret.size(); j++) {
+                for (int p = 0; p <= ret.get(j).size(); p++) {
+                    List<Integer> t = new ArrayList<Integer>(ret.get(j));
+                    t.add(p, num[i]);
+                    if (set.add(t)) {
+                        temp.add(t);
                     }
                 }
             }
-            res = temp;
+            ret = temp;
         }
-        return res;
+        return ret;
     }
 }

@@ -27,3 +27,24 @@ public class Solution {
         return head;
     }
 }
+
+public class Solution {
+    public ListNode rotateRight(ListNode head, int n) {
+        if (head == null || head.next == null || n <= 0) {
+            return head;
+        }
+        int num = 1;
+        ListNode temp = head;
+        for (;temp.next != null; num++) {
+            temp = temp.next;
+        }
+        temp.next = head;
+        n = num - n % num;
+        for (int i = 0; i < n; i++) {
+            temp = temp.next;
+        }
+        ListNode newHead = temp.next;
+        temp.next = null;
+        return newHead;
+    }
+}

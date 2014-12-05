@@ -10,10 +10,10 @@ public class Solution {
         if (start > end) {
             return null;
         }
-        int mid = (end + start) / 2;
-        TreeNode root = new TreeNode(num[mid]);
-        root.left = helper(start, mid - 1, num);
-        root.right = helper(mid + 1, end, num);
-        return root;
+        int mid = (start + end) / 2;
+        TreeNode node = new TreeNode(num[mid]);
+        node.left = helper(start, mid - 1, num);
+        node.right = helper(mid + 1, end, num);
+        return node;
     }
 }

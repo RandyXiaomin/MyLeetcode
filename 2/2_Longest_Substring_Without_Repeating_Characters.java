@@ -3,22 +3,16 @@ public class Solution {
         if (s == null || s.length() == 0) {
             return 0;
         }
-        Queue<Character> q = new LinkedList<>();
-        Set<Character> set = new HashSet<>();
-        int res = 1;
-        for (int i = 0; i < s.length(); i++) {
+        Map<Character, Integer> map = new HashMap<>();
+        int max = 1;
+        for (int i = 0, curStart = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (set.add(c)) {
-                q.offer(c);
-                res = Math.max(q.size(), res);
-            } else {
-                while (!set.add(c)) {
-                    char cc = q.poll();
-                    set.remove(cc);
-                }
-                q.offer(c);
+            if (map.containsKey(c) && map.get(c) >= curStart) {
+                    curStart = map.get(c) + 1;
             }
+            map.put(c, i);
+            max = Math.max(i - curStart + 1, max);
         }
-        return res;
+        return max;
     }
 }

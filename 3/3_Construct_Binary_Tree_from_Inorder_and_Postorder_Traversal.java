@@ -3,25 +3,20 @@ public class Solution {
         if (inorder == null || postorder == null || inorder.length == 0 || postorder.length == 0 || inorder.length != postorder.length) {
             return null;
         }
-        return helper(inorder, postorder, 0, inorder.length - 1, 0, postorder.length - 1);
+        return helper(0, inorder.length - 1, 0, postorder.length - 1, inorder, postorder);
     }
     
-    public TreeNode helper(int[] inorder, int[] postorder, int s1, int e1, int s2, int e2) {
-        if (s1 > e1 || s2 > e2) {
+    public TreeNode helper(int iStart, int iEnd, int pStart, int pEnd, int[] inorder, int[] postorder) {
+        if (iStart > iEnd || pStart > pEnd) {
             return null;
         }
-        TreeNode root = new TreeNode(postorder[e2]);
-        int leftLen = 0;
-        int rightLen = 0;
-        for (int i = s1; i <= e1; i++) {
-            if (inorder[i] == postorder[e2]) {
-                leftLen = i - s1;
-                rightLen = e1 - s1 - leftLen;
-                break;
+        TreeNode node = new TreeNode(postorder[pEnd]);
+        for (int i = iStart; i <= iEnd; i++) {
+            if (inorder[i] == postorder[pEnd]) {
+                node.left = helper(iStart, i - 1, pStart, pStart + i - iStart - 1, inorder, postorder);
+                node.right = helper(i + 1, iEnd, pStart + i - iStart, pEnd - 1, inorder, postorder);
             }
         }
-        root.left = helper(inorder, postorder, s1, s1 + leftLen - 1, s2, s2 + leftLen - 1);
-        root.right = helper(inorder, postorder, e1 - rightLen + 1, e1, e2 - rightLen, e2 - 1);
-        return root;
+        return node;
     }
 }

@@ -1,23 +1,11 @@
 public class Solution {
     public boolean hasPathSum(TreeNode root, int sum) {
-        return helper(root, sum, 0);
-    }
-    
-    public boolean helper(TreeNode node, int sum, int curSum) {
-        if (node == null) {
+        if (root == null) {
             return false;
         }
-        curSum += node.val;
-        if (node.left == null && node.right == null) {
-            return curSum == sum;
+        if (root.right == null && root.left == null) {
+            return sum == root.val;
         }
-        boolean res = false;
-        if (node.left != null) {
-            res = res || helper(node.left, sum, curSum);
-        }
-        if (node.right != null) {
-            res = res || helper(node.right, sum, curSum);
-        }
-        return res;
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
 }

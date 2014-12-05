@@ -5,17 +5,17 @@ public class Solution {
         }
         boolean[][] rowFlag = new boolean[9][9];
         boolean[][] colFlag = new boolean[9][9];
-        boolean[][] bloFlag = new boolean[9][9];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (board[i][j] != '.') {
-                    int c = board[i][j] - '1';
-                    if (rowFlag[i][c] || colFlag[j][c] || bloFlag[i / 3 * 3 + j / 3][c]) {
+        boolean[][] boxFlag = new boolean[9][9];
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (board[row][col] != '.') {
+                    int n = board[row][col] - '1';
+                    if (rowFlag[row][n] || colFlag[col][n] || boxFlag[3 * (row / 3) + col / 3][n]) {
                         return false;
                     }
-                    rowFlag[i][c] = true;
-                    colFlag[j][c] = true;
-                    bloFlag[i / 3 * 3 + j / 3][c] = true;
+                    rowFlag[row][n] = true;
+                    colFlag[col][n] = true;
+                    boxFlag[3 * (row / 3) + col / 3][n] = true;
                 }
             }
         }
