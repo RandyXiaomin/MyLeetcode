@@ -3,7 +3,7 @@ Implement strStr(),4,5,string,two pointersKMProlling hash,1,
 Merge Intervals,4,5,arraylinked listred-black tree,sortmerge,1,
 Insert Interval,4,5,arraylinked listred-black tree,sortmerge,1,
 3Sum,3,5,array,two pointers,2,Remove Repeat
-"Pow(x, n)",3,5,,binary searchmath,2,n < 0
+Pow,3,5,,binary searchmath,2,n < 0
 Set Matrix Zeroes,3,5,array,,1,
 Validate Binary Search Tree,3,5,tree,dfs,1,
 Word Ladder,3,5,graph,bfsshortest path,1,
