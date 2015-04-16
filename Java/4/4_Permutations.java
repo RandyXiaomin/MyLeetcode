@@ -1,21 +1,21 @@
 public class Solution {
     public List<List<Integer>> permute(int[] num) {
-        List<List<Integer>> res = new ArrayList<>();
+        List<List<Integer>> ret = new ArrayList<>();
         if (num == null || num.length == 0) {
-            return res;
+            return ret;
         }
-        res.add(new ArrayList<Integer>());
+        ret.add(new ArrayList<Integer>());
         for (int i = 0; i < num.length; i++) {
             List<List<Integer>> temp = new ArrayList<>();
-            for (int j = 0; j < res.size(); j++) {
-                for (int k = 0; k <= res.get(j).size(); k++) {
-                    List<Integer> sol = new ArrayList<>(res.get(j));
-                    sol.add(k, num[i]);
+            for (List<Integer> perm : ret) {
+                for (int j = 0; j <= perm.size(); j++) {
+                    List<Integer> sol = new ArrayList<Integer>(perm);
+                    sol.add(j, num[i]);
                     temp.add(sol);
                 }
             }
-            res = temp;
+            ret = temp;
         }
-        return res;
+        return ret;
     }
 }

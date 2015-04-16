@@ -18,7 +18,6 @@ public class Solution {
                 newInterval.end = Math.max(newInterval.end, interval.end);
             }
         }
-        List<Interval> test;
         return res;
     }
 }

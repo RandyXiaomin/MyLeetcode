@@ -23,7 +23,6 @@ public class Solution {
             res = res * 10 + str.charAt(i) - '0';
         }
         res *= flag;
-        res = Math.
         res = Math.min(res, Integer.MAX_VALUE);
         res = Math.max(res, Integer.MIN_VALUE);
         return (int)res;

@@ -26,7 +26,6 @@ public class Solution {
                 flag[row] = col;
                 sol[row][col] = 'Q';
                 helper(row + 1, flag, sol, res);
-                flag[row] = 0;
                 sol[row][col] = '.';
             }
         }

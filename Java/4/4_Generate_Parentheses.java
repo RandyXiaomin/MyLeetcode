@@ -1,24 +1,24 @@
 public class Solution {
     public List<String> generateParenthesis(int n) {
-        List<String> res = new ArrayList<>();
+        List<String> ret = new ArrayList<>();
         if (n <= 0) {
-            return res;
+            return ret;
         }
-        helper(0, 0, "", n, res);
-        return res;
+        generateParenthesis(0, 0, n, ret, new StringBuilder());
+        return ret;
     }
     
-    public void helper(int curLeft, int curRight, String s, int n, List<String> res) {
-        if (curLeft == n) {
-            while (curRight++ < n) {
-                s += ")";
+    public void generateParenthesis(int left, int right, int n, List<String> ret, StringBuilder current) {
+        if (left == n) {
+            while (right++ < n) {
+                current.append(')');
             }
-            res.add(s);
-        } else {
-            if (curLeft > curRight) {
-                helper(curLeft, curRight + 1, s + ')', n, res);
-            }
-            helper(curLeft + 1, curRight, s + '(', n, res);
+            ret.add(current.toString());
+            return;
         }
+        if (left > right) {
+            generateParenthesis(left, right + 1, n, ret, new StringBuilder(current).append(')'));
+        } 
+        generateParenthesis(left + 1, right, n, ret, current.append('(')); // left
     }
 }
